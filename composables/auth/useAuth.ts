@@ -4,28 +4,28 @@ import { useApiFetch } from '../useApiFetch'
 
 export const useAuth = () => {
     const authUser = useAuthUser()
+    const token = useCookie('auth-token')
 
     const setUser = (user: any) => {
-        authUser.value = user
+        authUser.value.user = user
+        authUser.value.loggedIn = true
     }
-    const setCookie = (cookie: any) => {
-        cookie.value = cookie
+
+    const setCookie = (cookie: string) => {
+        token.value = cookie
     }
 
 
-    const login = async (
-        email: string,
-        password: string,
-    ) => {
-        const data = await useApiFetch('/auth/login', {
+    const login = async (email: string, password: string) => {
+        const { data } = await useApiFetch('/auth/login', {
             method: 'POST',
             body: {
                 email,
                 password,
             },
         })
-
-        setUser(data.data)
+        setUser(data.value.data.user)
+        setCookie(data.value.data.token)
 
         return authUser
     }
@@ -36,7 +36,7 @@ export const useAuth = () => {
         password: string,
         terms: boolean,
     ) => {
-        const data = await useApiFetch('/auth/register', {
+        const { data } = await useApiFetch('/auth/register', {
             method: 'POST',
             body: {
                 name,
@@ -45,13 +45,26 @@ export const useAuth = () => {
                 terms,
             },
         })
-        setUser(data.data)
+        setUser(data.value.data.user)
+        setCookie(data.value.data.token)
 
         return authUser
+    }
+
+    const userInfo = async () => {
+        try {
+            const  { data }  = await useApiFetch('/user/info')
+            setUser(data.value.data)
+            return authUser
+        } catch {
+            
+        }
+  
     }
 
     return {
         login,
         register,
+        userInfo,
     }
 }

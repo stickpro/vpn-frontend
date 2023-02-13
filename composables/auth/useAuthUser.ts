@@ -1,5 +1,10 @@
-import type { UserWithoutPassword } from '~~/types/user'
+import type { Auth } from '~~/types/user'
 
 export const useAuthUser = () => {
-  return useState<UserWithoutPassword | null>('user', () => null)
+  return useState<Auth>('auth', () => {
+    return {
+      'user': null,
+      'loggedIn': false,
+    }
+  })
 }

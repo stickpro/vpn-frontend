@@ -1,23 +1,12 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="mx-auto h-12 w-auto"
-        src="/img/logos/workflow-mark-on-white.svg"
-        alt="Workflow"
-      />
+      <h1 class="mt-6 text-center text-5xl leading-9 font-extrabold text-gray-900">
+        BRO VPN
+      </h1>
       <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
         Sign in to your account
       </h2>
-      <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
-        Or
-        <a
-          href="#"
-          class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-        >
-          start your 14-day free trial
-        </a>
-      </p>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -156,17 +145,28 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 
-const { login } = useAuth();
+const { login, userInfo } = useAuth();
 
 const email = ref();
 const password = ref();
 
-const sudmit = async () => {
-  const { data } = await login(email.value, password.value);
+const form = reactive({
+  error: "",
+  pending: false,
+});
 
-  console.log(data);
+const sudmit = async () => {
+  userInfo();
+  try {
+    await login(email.value, password.value);
+    navigateTo("/dashboard");
+  } catch (error: any) {
+    if (error.data.message) form.error = error.data.message;
+  } finally {
+    form.pending = false;
+  }
 };
 </script>

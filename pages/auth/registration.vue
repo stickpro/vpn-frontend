@@ -1,23 +1,12 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="mx-auto h-12 w-auto"
-        src="/img/logos/workflow-mark-on-white.svg"
-        alt="Workflow"
-      />
-      <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+      <h1 class="mt-6 text-center text-5xl leading-9 font-extrabold text-gray-900">
+        BRO VPN
+      </h1>
+      <h2 class="mt-6 text-center text-2xl leading-9 font-extrabold text-gray-900">
         Sign in to your account
       </h2>
-      <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
-        Or
-        <a
-          href="#"
-          class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-        >
-          start your 14-day free trial
-        </a>
-      </p>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -105,7 +94,7 @@
           </div>
         </form>
 
-        <div class="mt-6">
+        <!-- <div class="mt-6">
           <div class="relative">
             <div class="absolute inset-0 flex items-center">
               <div class="w-full border-t border-gray-300"></div>
@@ -165,7 +154,7 @@
               </span>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -187,3 +176,4 @@ const sudmit = async () => {
   console.log(data);
 };
 </script>
+<style></style>

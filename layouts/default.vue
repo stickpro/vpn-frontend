@@ -1,8 +1,7 @@
 <template>
-  <div id="app-layout">
-    <main>
+  <div id="app-layout" class="bg-[#f0f5f5]">
+    <main class="container mx-auto">
       <slot />
-      {{ auth }}
     </main>
   </div>
 </template>

@@ -60,7 +60,7 @@
             <div class="text-sm leading-5">
               <a
                 href="#"
-                class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+                class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150"
               >
                 Forgot your password?
               </a>
@@ -71,7 +71,7 @@
             <span class="block w-full rounded-md shadow-sm">
               <button
                 type="submit"
-                class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#185BFF] hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-indigo active:bg-blue-700 transition duration-150 ease-in-out"
               >
                 Sign in
               </button>
@@ -79,7 +79,17 @@
           </div>
         </form>
 
-        <div class="mt-6">
+        <div class="relative mt-6">
+          <span class="px-2 bg-white text-black">
+            Don’t have an account?
+            <NuxtLink
+              class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+              to="/auth/registration"
+              >Sign Up</NuxtLink
+            >
+          </span>
+        </div>
+        <div class="mt-6 hidden">
           <div class="relative">
             <div class="absolute inset-0 flex items-center">
               <div class="w-full border-t border-gray-300"></div>
@@ -148,6 +158,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
+definePageMeta({
+  layout: "empty",
+});
 const { login, userInfo } = useAuth();
 
 const email = ref();

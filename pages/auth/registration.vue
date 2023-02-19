@@ -86,9 +86,9 @@
             <span class="block w-full rounded-md shadow-sm">
               <button
                 type="submit"
-                class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#185BFF] hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-indigo active:bg-blue-700 transition duration-150 ease-in-out"
               >
-                Sign in
+                Sign Up
               </button>
             </span>
           </div>
@@ -160,8 +160,12 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
+
+definePageMeta({
+  layout: "empty",
+});
 
 const { register } = useAuth();
 
@@ -170,10 +174,20 @@ const name = ref();
 const password = ref();
 const terms = ref();
 
-const sudmit = async () => {
-  const { data } = await register(name.value, email.value, password.value, terms.value);
+const form = reactive({
+  error: "",
+  pending: false,
+});
 
-  console.log(data);
+const sudmit = async () => {
+  try {
+    await register(name.value, email.value, password.value, terms.value);
+    navigateTo("/dashboard");
+  } catch (error: any) {
+    if (error.data.message) form.error = error.data.message;
+  } finally {
+    form.pending = false;
+  }
 };
 </script>
 <style></style>

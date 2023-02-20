@@ -1,5 +1,5 @@
 <template>
-  <div class="px-10" v-if="configStore.configs.length <= 0">
+  <div class="px-10" v-if="configStore?.configs?.length <= 0">
     <div
       class="text-center mt-12 px-12 pb-12 mx-auto space-y-4 mb-28 max-w-lg border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
     >

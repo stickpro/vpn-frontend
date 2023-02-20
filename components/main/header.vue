@@ -6,7 +6,7 @@
 
     <div class="flex items-center justify-between">
       <span class="font-bold text-xl mr-2 capitalize">{{
-        status ? auth.user.name : auth.user.balance + " ₽"
+        status ? auth.user?.name : auth.user?.balance + " ₽"
       }}</span>
       <!-- On: "bg-indigo-600", Off: "bg-gray-200" -->
       <span

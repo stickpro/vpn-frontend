@@ -27,8 +27,17 @@ export const useConfig = () => {
         return configStore
     }
 
+    const deleteConfig = async (configId: string) => {
+        const { data } = await useApiFetch('/user/config/' + configId, {
+            method: 'DELETE',
+        })
+
+        return data.value.data
+    }
+
     return {
         loadConfigs,
-        makeConfig
+        makeConfig,
+        deleteConfig
     }
 }

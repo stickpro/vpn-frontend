@@ -6,3 +6,7 @@ node_modules
 .output
 .env
 dist
+.env
+*.env
+*.bak
+/components/vue3-qr-code-styling/

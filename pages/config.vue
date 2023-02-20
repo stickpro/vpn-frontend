@@ -1,4 +1,50 @@
 <template>
+  <div class="px-10" v-if="configStore.configs.length <= 0">
+    <div
+      class="text-center mt-12 px-12 pb-12 mx-auto space-y-4 mb-28 max-w-lg border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      <svg
+        class="mx-auto h-12 w-12 text-gray-400"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          vector-effect="non-scaling-stroke"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+        />
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">No Configs</h3>
+      <p class="mt-1 text-sm text-gray-500">Get started by creating a new config.</p>
+      <div class="mt-6">
+        <button
+          @click="createConfig()"
+          type="button"
+          class="inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-[#185BFF] hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-indigo active:bg-blue-700 transition ease-in-out duration-150"
+        >
+          <!-- Heroicon name: solid/plus -->
+          <svg
+            class="-ml-1 mr-2 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          New Config
+        </button>
+      </div>
+    </div>
+  </div>
   <div
     v-for="config in configStore.configs"
     class="mt-12 px-12 pb-12 mx-auto space-y-4 mb-28 max-w-xl text-right"
@@ -48,13 +94,18 @@
 import { useConfig } from "~~/composables/config/useConfig";
 import { useConfigStore } from "~~/composables/config/useConfigStore";
 
-const { loadConfigs, deleteConfig } = useConfig();
+const { loadConfigs, deleteConfig, makeConfig } = useConfig();
 loadConfigs();
 
 const configStore = useConfigStore();
 
 const delele = async (configId) => {
   const { data } = await deleteConfig(configId);
+  await loadConfigs();
+};
+
+const createConfig = async () => {
+  const { data } = await makeConfig(1);
   await loadConfigs();
 };
 

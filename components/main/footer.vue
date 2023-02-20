@@ -87,7 +87,7 @@
           stroke-linejoin="round"
         />
       </svg>
-      Devices
+      Configs
     </NuxtLink>
   </div>
 </template>

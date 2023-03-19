@@ -16,12 +16,12 @@ export const useAuth = () => {
     }
 
 
-    const login = async (email: string, password: string) => {
+    const login = async (phone: string, authCode: string) => {
         const { data } = await useApiFetch('/auth/login', {
             method: 'POST',
             body: {
-                email,
-                password,
+                phone,
+                authCode,
             },
         })
         setUser(data.value.data.user)
@@ -61,6 +61,7 @@ export const useAuth = () => {
         }
   
     }
+    
 
     return {
         login,

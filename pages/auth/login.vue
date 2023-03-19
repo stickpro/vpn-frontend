@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <h1 class="mt-6 text-center text-5xl leading-9 font-extrabold text-gray-900">
-        BRO VPN
+        VPNOCHKA
       </h1>
       <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
         Sign in to your account
@@ -19,8 +19,8 @@
             <div class="mt-1 rounded-md shadow-sm">
               <input
                 id="email"
-                v-model="email"
-                type="email"
+                v-model="phone"
+                type="phone"
                 required
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               />
@@ -36,10 +36,9 @@
             </label>
             <div class="mt-1 rounded-md shadow-sm">
               <input
-                v-model="password"
+                v-model="authCode"
                 id="password"
                 type="password"
-                required
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               />
             </div>
@@ -163,8 +162,8 @@ definePageMeta({
 });
 const { login, userInfo } = useAuth();
 
-const email = ref();
-const password = ref();
+const phone = ref();
+const authCode = ref();
 
 const form = reactive({
   error: "",
@@ -174,7 +173,7 @@ const form = reactive({
 const sudmit = async () => {
   userInfo();
   try {
-    await login(email.value, password.value);
+    await login(phone.value, authCode.value);
     navigateTo("/dashboard");
   } catch (error: any) {
     if (error.data.message) form.error = error.data.message;

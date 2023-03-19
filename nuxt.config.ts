@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     },
     app: {
         pageTransition: { name: 'slide-right', mode: 'out-in' },
+        head: {
+            viewport: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover',
+        }
       },
     runtimeConfig: {
         public: {

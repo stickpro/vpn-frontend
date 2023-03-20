@@ -16,7 +16,7 @@ export const useAuth = () => {
     }
 
 
-    const login = async (phone: string, authCode: string) => {
+    const login = async (phone: string, authCode: number|undefined) => {
         const { data } = await useApiFetch('/auth/login', {
             method: 'POST',
             body: {
@@ -24,8 +24,9 @@ export const useAuth = () => {
                 authCode,
             },
         })
-        setUser(data.value.data.user)
-        setCookie(data.value.data.token)
+        
+        setUser(data.value?.data?.user)
+        setCookie(data.value?.data?.token)
 
         return authUser
     }

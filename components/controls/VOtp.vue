@@ -3,7 +3,7 @@
     <input
       type="tel"
       v-for="(el, ind) in digits"
-      class="w-16 h-16 flex flex-col items-start justify-end text-center px-5 outline-none rounded-xl border font-medium border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+      class="w-16 h-16 flex flex-col items-start justify-end text-center px-5 outline-none rounded-xl border font-medium border-gray-200 text-lg bg-gray-200 focus:bg-gray-50 focus:ring-1 ring-blue-700"
       :key="el + ind"
       v-model="digits[ind]"
       :autofocus="ind === 0"

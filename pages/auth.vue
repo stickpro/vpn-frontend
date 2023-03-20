@@ -5,6 +5,7 @@
       <h2 class="mt-6 text-left text-3xl leading-9 font-extrabold text-gray-900">
         Войти или зарегистрироваться
       </h2>
+      {{ errors }}
     </div>
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="space-y-4 md:space-y-6" v-if="!sencodeStatus">
@@ -16,7 +17,7 @@
             v-model="phone"
             @maska="onMaska"
             id="floating_outlined"
-            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-gray-100 rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
           />
           <label
@@ -47,13 +48,15 @@
 import { ref } from "vue";
 import { vMaska, MaskaDetail } from "maska";
 
+const { login } = useAuth();
+
 definePageMeta({
   layout: "empty",
 });
 
 const phone = ref();
 const phoneRaw = ref();
-
+const errors = ref();
 const code = ref("");
 
 const sencodeStatus = ref(false);
@@ -64,13 +67,22 @@ const onMaska = (event: CustomEvent<MaskaDetail>) => {
   }
 };
 
-const sendCode = () => {
-  sencodeStatus.value = true;
-  console.log(phoneRaw.value);
+const sendCode = async () => {
+  try {
+    await login(phoneRaw.value, undefined);
+    sencodeStatus.value = true;
+  } catch (error: any) {
+    errors.value = error.message;
+  }
 };
 
-const auth = () => {
-  console.log(code.value);
+const auth = async () => {
+  try {
+    await login(phoneRaw.value, Number(code.value));
+    navigateTo("/dashboard");
+  } catch (error: any) {
+    errors.value = error.message;
+  }
 };
 
 watch(code, () => {

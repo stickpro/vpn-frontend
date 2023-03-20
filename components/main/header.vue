@@ -1,9 +1,6 @@
 <template>
   <div class="flex mx-auto justify-between px-9 pt-9 max-w-lg">
-    <h1 class="text-center text-2xl leading-9 font-extrabold text-gray-900">
-      VPN & ТОЧКА
-    </h1>
-
+    <h1 class="text-center text-2xl leading-9 font-extrabold text-gray-900">VPNOCHKA</h1>
     <div class="flex items-center justify-between">
       <span class="font-bold text-xl mr-2 capitalize">{{
         status ? auth.user?.name : auth.user?.balance + " ₽"

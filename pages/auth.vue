@@ -63,7 +63,7 @@ const sencodeStatus = ref(false);
 
 const onMaska = (event: CustomEvent<MaskaDetail>) => {
   if (event.detail.completed) {
-    phoneRaw.value = phone.value?.replace(/^\D+/g, "");
+    phoneRaw.value = event.detail.masked.replace(/[^0-9]+/g, "");
   }
 };
 

@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@diadal/vue3-qr-code-styling": "^1.4.6",
+    "gsap": "^3.11.5",
     "maska": "^2.1.7",
     "vue3-qr-code-styling": "^1.4.6"
   }

@@ -1,5 +1,5 @@
 <template>
-  <div id="app-layout" class="bg-neutral-200">
+  <div id="app-layout">
     <main class="container mx-auto min-h-screen">
       <MainHeader />
       <slot />
